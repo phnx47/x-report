@@ -41,16 +41,17 @@ export default class Harvest {
           to: to,
           tasks: []
         };
-        for (let i = 0; i < response.data.time_entries.length; i++) {
-          const entry = response.data.time_entries[i];
+        response.data.time_entries.forEach((entry) => {
           let hasTask = report.tasks.some(t => t['note'] === entry.notes)
           if (!hasTask) {
             report.tasks.push({
+              typeId: entry.task.id,
               note: entry.notes,
-              type: entry.task.name
+              typeName: entry.task.name
             });
           }
-        }
+        });
+        report.tasks = report.tasks.sort((a,b) =>  a.typeId - b.typeId )
         return Promise.resolve(report);
       })
       .catch((err) => {

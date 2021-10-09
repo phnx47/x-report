@@ -16,7 +16,11 @@ const harvest = new Harvest({
 harvest
   .getCurrentWeek()
   .then((report: Report) => {
-    console.log(report);
+    let text = `From *${report.from}* To *${report.to}* \n\n`;
+    report.tasks.forEach((task) => {
+      text = text + task.typeName + ': ' + task.note + '\n';
+    });
+    console.log(text);
   })
   .catch((err) => {
     console.error(err)
