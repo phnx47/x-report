@@ -1,0 +1,10 @@
+{
+  "name": "x-report",
+  "version": "0.0.1",
+  "description": "Export from Harvest to Slack",
+  "main": "index.js",
+  "repository": "git@github.com:phnx47/x-report.git",
+  "author": "Serge K <serge.k@fastmail.com>",
+  "license": "GPL3",
+  "private": true
+}
