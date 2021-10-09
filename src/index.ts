@@ -18,7 +18,7 @@ harvest
   .then((report: Report) => {
     let text = `From *${report.from}* To *${report.to}* \n\n`;
     report.tasks.forEach((task) => {
-      text = text + task.typeName + ': ' + task.note + '\n';
+      text = text + `${task.note} (${task.typeName})\n`;
     });
     console.log(text);
   })
