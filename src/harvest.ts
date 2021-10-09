@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { Report, Task } from './report';
+import { Report } from './report';
 
 export interface Config {
   accessToken: string;
@@ -63,7 +63,7 @@ export default class Harvest {
   }
 }
 
-interface IdName {
+interface Type {
   id: number;
   name: string;
 }
@@ -71,7 +71,7 @@ interface IdName {
 interface TimeEntry {
   id: number;
   spent_date: string;
-  task: IdName;
+  task: Type;
   hours: number;
   hours_without_timer: number;
   rounded_hours: number;
