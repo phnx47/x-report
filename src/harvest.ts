@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { Task } from './task';
+import { Report, Task } from './report';
 
 export interface Config {
   accessToken: string;
@@ -26,31 +26,32 @@ export default class Harvest {
     });
   }
 
-  async getCurrentWeek(): Promise<Task[]> {
+  async getCurrentWeek(): Promise<Report> {
     //var curr = new Date();
     var curr = new Date('2021-10-09'); // for debug
     var first = curr.getDate() - curr.getDay();
 
-    var firstDay = new Date(curr.setDate(curr.getDate() - curr.getDay()));
-    var lastDay = new Date(curr.setDate(first + 6))
+    var from = new Date(curr.setDate(first)).toISOString().slice(0, 10);
+    var to = new Date(curr.setDate(first + 6)).toISOString().slice(0, 10);
 
-    var from = firstDay.toISOString().slice(0, 10).replaceAll('-', '');
-    var to = lastDay.toISOString().slice(0, 10).replaceAll('-', '')
-
-    let tasks: Task[] = [];
-    return this.axiosInstance.get<Report>(`/time_entries?from=${from}&to=${to}`)
+    return this.axiosInstance.get<HarvestReport>(`/time_entries?from=${from}&to=${to}`)
       .then((response) => {
+        const report: Report = {
+          from: from,
+          to: to,
+          tasks: []
+        };
         for (let i = 0; i < response.data.time_entries.length; i++) {
           const entry = response.data.time_entries[i];
-          let hasTask = tasks.some(t => t['note'] === entry.notes)
+          let hasTask = report.tasks.some(t => t['note'] === entry.notes)
           if (!hasTask) {
-            tasks.push({
+            report.tasks.push({
               note: entry.notes,
               type: entry.task.name
             });
           }
         }
-        return Promise.resolve(tasks);
+        return Promise.resolve(report);
       })
       .catch((err) => {
         return Promise.reject({
@@ -92,7 +93,7 @@ interface TimeEntry {
 }
 
 
-interface Report {
+interface HarvestReport {
   time_entries: TimeEntry[];
   per_page: number;
   total_pages: number;

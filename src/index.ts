@@ -1,5 +1,5 @@
 import Harvest from './harvest';
-import { Task } from './task';
+import { Report } from './report';
 
 if (!process.env.HARVEST_ACCESS_TOKEN)
   throw new Error('Environment variable "HARVEST_ACCESS_TOKEN" is not defined')
@@ -15,8 +15,8 @@ const harvest = new Harvest({
 
 harvest
   .getCurrentWeek()
-  .then((tasks: Task[]) => {
-    console.log(tasks);
+  .then((report: Report) => {
+    console.log(report);
   })
   .catch((err) => {
     console.error(err)
