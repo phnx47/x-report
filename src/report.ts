@@ -1,5 +1,6 @@
 export interface Task {
-  type: string;
+  typeId: number,
+  typeName: string;
   note: string;
 }
 
