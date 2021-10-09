@@ -12,6 +12,7 @@
     "start": "node ./dist/index.js"
   },
   "dependencies": {
+    "axios": "0.22.0"
   },
   "devDependencies": {
     "typescript": "4.4.3"
