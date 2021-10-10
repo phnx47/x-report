@@ -5,7 +5,6 @@
   "repository": "git@github.com:phnx47/x-report.git",
   "author": "Serge K <serge.k@fastmail.com>",
   "license": "GPL3",
-  "private": true,
   "scripts": {
     "build": "tsc",
     "ts-start": "ts-node ./src/index.ts",
