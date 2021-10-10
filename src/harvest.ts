@@ -42,16 +42,20 @@ export default class Harvest {
           tasks: []
         };
         response.data.time_entries.forEach((entry) => {
-          let hasTask = report.tasks.some(t => t['note'] === entry.notes)
-          if (!hasTask) {
+          const task = report.tasks.find(x => x.id === entry.task.id);
+          if (!task) {
             report.tasks.push({
-              typeId: entry.task.id,
-              note: entry.notes,
-              typeName: entry.task.name
+              id: entry.task.id,
+              notes: [entry.notes],
+              name: entry.task.name
             });
+          } else {
+            let hasNotes = task.notes.some(t => t === entry.notes)
+            if (!hasNotes)
+              task.notes.push(entry.notes);
           }
         });
-        report.tasks = report.tasks.sort((a,b) =>  a.typeId - b.typeId )
+        report.tasks = report.tasks.sort((a, b) => a.id - b.id)
         return Promise.resolve(report);
       })
       .catch((err) => {
@@ -63,7 +67,7 @@ export default class Harvest {
   }
 }
 
-interface Type {
+interface HarvestTask {
   id: number;
   name: string;
 }
@@ -71,7 +75,7 @@ interface Type {
 interface TimeEntry {
   id: number;
   spent_date: string;
-  task: Type;
+  task: HarvestTask;
   hours: number;
   hours_without_timer: number;
   rounded_hours: number;
