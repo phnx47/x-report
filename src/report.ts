@@ -1,7 +1,7 @@
 export interface Task {
-  typeId: number,
-  typeName: string;
-  note: string;
+  id: number,
+  name: string;
+  notes: string[];
 }
 
 export interface Report {
@@ -14,7 +14,10 @@ export interface Report {
 export function printReport(report: Report){
   let text = `Report from *${report.from}* To *${report.to}* \n\n`;
   report.tasks.forEach((task) => {
-    text = text + `${task.note} [${task.typeName}]\n`;
+    text = text + `*${task.name}*\n`;
+    task.notes.forEach((note) => {
+      text = text + `- ${note}\n`;
+    })
   });
   console.log(text);
 }
