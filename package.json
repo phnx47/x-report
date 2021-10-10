@@ -4,7 +4,7 @@
   "description": "Export from Harvest to Slack",
   "repository": "git@github.com:phnx47/x-report.git",
   "author": "Serge K <serge.k@fastmail.com>",
-  "license": "GPL3",
+  "license": "GPL-3.0",
   "scripts": {
     "build": "tsc",
     "ts-start": "ts-node ./src/index.ts",
