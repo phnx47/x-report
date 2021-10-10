@@ -27,12 +27,12 @@ export default class Harvest {
   }
 
   async getCurrentWeek(): Promise<Report> {
-    var curr = new Date();
-    //var curr = new Date('2021-10-09'); // for debug
-    var first = curr.getDate() - curr.getDay();
+    const curr = new Date();
+    //const curr = new Date('2021-10-09'); // for debug
+    const first = curr.getDate() - curr.getDay();
 
-    var from = new Date(curr.setDate(first)).toISOString().slice(0, 10);
-    var to = new Date(curr.setDate(first + 6)).toISOString().slice(0, 10);
+    const from = new Date(curr.setDate(first)).toISOString().slice(0, 10);
+    const to = new Date(curr.setDate(first + 6)).toISOString().slice(0, 10);
 
     return this.axiosInstance.get<HarvestReport>(`/time_entries?from=${from}&to=${to}`)
       .then((response) => {
@@ -50,7 +50,7 @@ export default class Harvest {
               name: entry.task.name
             });
           } else {
-            let hasNotes = task.notes.some(t => t === entry.notes)
+            const hasNotes = task.notes.some(t => t === entry.notes)
             if (!hasNotes)
               task.notes.push(entry.notes);
           }
