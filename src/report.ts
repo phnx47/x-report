@@ -12,7 +12,7 @@ export interface Report {
 
 
 export function printReport(report: Report){
-  let text = `Report from *${report.from}* To *${report.to}* \n\n`;
+  let text = `Report from *${report.from}* to *${report.to}* \n\n`;
   report.tasks.forEach((task) => {
     text = text + `*${task.name}*\n`;
     task.notes.forEach((note) => {
