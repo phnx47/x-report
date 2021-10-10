@@ -27,8 +27,8 @@ export default class Harvest {
   }
 
   async getCurrentWeek(): Promise<Report> {
-    //var curr = new Date();
-    var curr = new Date('2021-10-09'); // for debug
+    var curr = new Date();
+    //var curr = new Date('2021-10-09'); // for debug
     var first = curr.getDate() - curr.getDay();
 
     var from = new Date(curr.setDate(first)).toISOString().slice(0, 10);
