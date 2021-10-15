@@ -32,8 +32,8 @@ export default class Harvest {
     //const curr = new Date('2021-10-09'); // for debug
     const first = curr.getDate() - curr.getDay();
 
-    const from = new Date(curr.setDate(first)).toISOString().slice(0, 10);
-    const to = new Date(curr.setDate(first + 6)).toISOString().slice(0, 10);
+    const from = new Date(curr.setDate(first + 1)).toISOString().slice(0, 10);
+    const to = new Date(curr.setDate(first + 5)).toISOString().slice(0, 10);
 
     return this.axiosInstance.get<HarvestReport>(`/time_entries?from=${from}&to=${to}`)
       .then((response) => {
