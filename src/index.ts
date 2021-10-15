@@ -12,7 +12,6 @@ const harvest = new Harvest({
   accountId: process.env.HARVEST_ACCOUNT_ID
 });
 
-
 harvest
   .getCurrentWeek()
   .then((report: Report) => {
@@ -21,4 +20,3 @@ harvest
   .catch((err) => {
     console.error(err)
   })
-

@@ -8,8 +8,8 @@ export interface Config {
 }
 
 export default class Harvest {
-  private accessToken: string;
-  private accountId: string;
+  private readonly accessToken: string;
+  private readonly accountId: string;
   private axiosInstance: AxiosInstance;
 
   constructor(config: Config) {
@@ -29,7 +29,6 @@ export default class Harvest {
 
   async getCurrentWeek(): Promise<Report> {
     const curr = new Date();
-    //const curr = new Date('2021-10-09'); // for debug
     const first = curr.getDate() - curr.getDay();
 
     const from = new Date(curr.setDate(first + 1)).toISOString().slice(0, 10);
