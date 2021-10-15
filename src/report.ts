@@ -10,8 +10,7 @@ export interface Report {
   tasks: Task[];
 }
 
-
-export function printReport(report: Report){
+export function printReport(report: Report) {
   let text = `Report from *${report.from}* to *${report.to}* \n\n`;
   report.tasks.forEach((task) => {
     text = text + `*${task.name}*\n`;
