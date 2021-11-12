@@ -1,4 +1,4 @@
-export interface HarvestReport {
+export type HarvestReport = {
   time_entries: TimeEntry[];
   per_page: number;
   total_pages: number;
@@ -8,12 +8,12 @@ export interface HarvestReport {
   page: number;
 }
 
-interface HarvestTask {
+type HarvestTask = {
   id: number;
   name: string;
 }
 
-interface TimeEntry {
+type TimeEntry = {
   id: number;
   spent_date: string;
   task: HarvestTask;

@@ -1,20 +1,15 @@
 import axios, { AxiosInstance } from 'axios';
-import { HarvestReport } from './harvestReport';
+import { HarvestReport } from './harvestTypes';
 import { Report } from './report';
-
-export interface Config {
-  accessToken: string;
-  accountId: string;
-}
 
 export default class Harvest {
   private readonly accessToken: string;
   private readonly accountId: string;
   private axiosInstance: AxiosInstance;
 
-  constructor(config: Config) {
-    this.accessToken = config.accessToken;
-    this.accountId = config.accountId;
+  constructor(accessToken: string, accountId: string) {
+    this.accessToken = accessToken;
+    this.accountId = accountId;
 
     this.axiosInstance = axios.create({
       baseURL: 'https://api.harvestapp.com/api/v2',

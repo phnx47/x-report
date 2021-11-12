@@ -1,4 +1,4 @@
-import { HarvestReport } from "./harvestReport";
+import { HarvestReport } from "./harvestTypes";
 
 export class Report {
   private readonly from: string;
@@ -11,7 +11,7 @@ export class Report {
     this.tasks = [];
   }
 
-  print() {
+  getText(): string {
     let text = `Report from *${this.from}* to *${this.to}* \n\n`;
     this.tasks.forEach((task) => {
       text = text + `*${task.name}*\n`;
@@ -19,7 +19,7 @@ export class Report {
         text = text + `- ${note}\n`;
       })
     });
-    console.log(text);
+    return text;
   }
 
   static parseHarvest(from: string, to: string, harvestReport: HarvestReport): Report {
