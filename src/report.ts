@@ -1,22 +1,54 @@
-export interface Task {
+import { HarvestReport } from "./harvestReport";
+
+export class Report {
+  private readonly from: string;
+  private readonly to: string;
+  private tasks: Task[];
+
+  private constructor(from: string, to: string) {
+    this.from = from;
+    this.to = to
+    this.tasks = [];
+  }
+
+  print() {
+    let text = `Report from *${this.from}* to *${this.to}* \n\n`;
+    this.tasks.forEach((task) => {
+      text = text + `*${task.name}*\n`;
+      task.notes.forEach((note) => {
+        text = text + `- ${note}\n`;
+      })
+    });
+    console.log(text);
+  }
+
+  static parseHarvest(from: string, to: string, harvestReport: HarvestReport): Report {
+    const report: Report = new Report(from, to);
+    harvestReport.time_entries.forEach((entry) => {
+      const task = report.tasks.find(x => x.id === entry.task.id);
+      if (!task) {
+        report.tasks.push({
+          id: entry.task.id,
+          notes: [entry.notes],
+          name: entry.task.name
+        });
+      } else {
+        const hasNotes = task.notes.some(t => t === entry.notes)
+        if (!hasNotes)
+          task.notes.push(entry.notes);
+      }
+    });
+    report.sortTasks();
+    return report;
+  }
+
+  private sortTasks() {
+    this.tasks = this.tasks.sort((a, b) => a.id - b.id);
+  }
+}
+
+type Task = {
   id: number,
   name: string;
   notes: string[];
-}
-
-export interface Report {
-  from: string;
-  to: string;
-  tasks: Task[];
-}
-
-export function printReport(report: Report) {
-  let text = `Report from *${report.from}* to *${report.to}* \n\n`;
-  report.tasks.forEach((task) => {
-    text = text + `*${task.name}*\n`;
-    task.notes.forEach((note) => {
-      text = text + `- ${note}\n`;
-    })
-  });
-  console.log(text);
 }

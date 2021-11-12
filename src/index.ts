@@ -1,5 +1,5 @@
 import Harvest from './harvest';
-import { Report, printReport } from './report';
+import { Report } from './report';
 
 if (!process.env.HARVEST_ACCESS_TOKEN)
   throw new Error('Environment variable "HARVEST_ACCESS_TOKEN" is not defined')
@@ -15,7 +15,7 @@ const harvest = new Harvest({
 harvest
   .getCurrentWeek()
   .then((report: Report) => {
-    printReport(report);
+    report.print();
   })
   .catch((err) => {
     console.error(err)

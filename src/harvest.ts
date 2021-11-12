@@ -36,27 +36,7 @@ export default class Harvest {
 
     return this.axiosInstance.get<HarvestReport>(`/time_entries?from=${from}&to=${to}`)
       .then((response) => {
-        const report: Report = {
-          from: from,
-          to: to,
-          tasks: []
-        };
-        response.data.time_entries.forEach((entry) => {
-          const task = report.tasks.find(x => x.id === entry.task.id);
-          if (!task) {
-            report.tasks.push({
-              id: entry.task.id,
-              notes: [entry.notes],
-              name: entry.task.name
-            });
-          } else {
-            const hasNotes = task.notes.some(t => t === entry.notes)
-            if (!hasNotes)
-              task.notes.push(entry.notes);
-          }
-        });
-        report.tasks = report.tasks.sort((a, b) => a.id - b.id)
-        return Promise.resolve(report);
+        return Promise.resolve(Report.parseHarvest(from, to, response.data));
       })
       .catch((err) => {
         return Promise.reject({
