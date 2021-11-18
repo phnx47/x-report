@@ -5,13 +5,13 @@ import { Report } from './report';
 export default class Harvest {
   private readonly accessToken: string;
   private readonly accountId: string;
-  private axiosInstance: AxiosInstance;
+  private api: AxiosInstance;
 
   constructor(accessToken: string, accountId: string) {
     this.accessToken = accessToken;
     this.accountId = accountId;
 
-    this.axiosInstance = axios.create({
+    this.api = axios.create({
       baseURL: 'https://api.harvestapp.com/api/v2',
       headers: {
         'User-Agent': 'x-report',
@@ -29,7 +29,7 @@ export default class Harvest {
     const from = new Date(curr.setDate(first + 1)).toISOString().slice(0, 10);
     const to = new Date(curr.setDate(first + 5)).toISOString().slice(0, 10);
 
-    return this.axiosInstance.get<HarvestReport>(`/time_entries?from=${from}&to=${to}`)
+    return this.api.get<HarvestReport>(`/time_entries?from=${from}&to=${to}`)
       .then((response) => {
         return Promise.resolve(Report.parseHarvest(from, to, response.data));
       })
