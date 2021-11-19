@@ -1,8 +1,9 @@
 name: 🩺 Check PR
 on: [pull_request]
 
-jobs:
+jobs: 
   commitlint:
+    name: 🏭 Commit Lint
     runs-on: ubuntu-20.04
     steps:
       - name: 🚚 Checkout
