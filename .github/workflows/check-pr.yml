@@ -1,0 +1,13 @@
+name: 🩺 Check PR
+on: [pull_request]
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: 🚚 Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: 🧫 Commit Lint
+        uses: wagoid/commitlint-github-action@v4
