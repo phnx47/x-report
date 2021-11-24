@@ -1,4 +1,4 @@
-import { HarvestReport } from "./harvestTypes";
+import { HarvestReport } from './harvestTypes';
 
 export class Report {
   private readonly from: string;
