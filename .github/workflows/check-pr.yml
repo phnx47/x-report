@@ -1,14 +1,22 @@
 name: 🩺 Check PR
-on: [pull_request]
+on: [ pull_request ]
 
-jobs: 
-  commitlint:
-    name: 🏭 Commit Lint
+jobs:
+  check-pr:
+    name: 🏭 Run Checks
     runs-on: ubuntu-20.04
     steps:
       - name: 🚚 Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: 🧫 Commit Lint
+      - name: 🛠 Setup NodeJS
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - name: ⚙ NPM Install
+        run: npm install
+      - name: ⚡ Run ESLint
+        run: npm run lint
+      - name: 🧫 Run commitlint
         uses: wagoid/commitlint-github-action@v4
