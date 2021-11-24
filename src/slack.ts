@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default class Slack {
   private webhookUrl: string
@@ -13,7 +13,7 @@ export default class Slack {
     };
     axios.post(this.webhookUrl, JSON.stringify(options))
       .then((response) => {
-        console.log("Slack Response: " + response.data);
+        console.log('Slack Response: ' + response.data);
       })
       .catch((err) => {
         console.error(err)
