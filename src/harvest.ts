@@ -24,10 +24,10 @@ export default class Harvest {
 
   async getCurrentWeek(): Promise<Report> {
     const curr = new Date();
-    const first = curr.getDate() - curr.getDay();
+    const first = new Date(curr.setDate(curr.getDate() - curr.getDay() + 1));
 
-    const from = new Date(curr.setDate(first + 1)).toISOString().slice(0, 10);
-    const to = new Date(curr.setDate(first + 5)).toISOString().slice(0, 10);
+    const from = first.toISOString().slice(0, 10);
+    const to = new Date(curr.setDate(first.getDate() + 4)).toISOString().slice(0, 10);
 
     return this.api.get<HarvestReport>(`/time_entries?from=${from}&to=${to}`)
       .then((response) => {
