@@ -9,7 +9,7 @@
     "build": "tsc",
     "ts-start": "ts-node ./src/index.ts",
     "start": "node ./dist/index.js",
-    "prepare": "husky install",
+    "husky-install": "husky install",
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix"
   },
