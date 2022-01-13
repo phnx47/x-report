@@ -12,10 +12,10 @@ jobs:
     steps:
       - name: 🚚 Checkout
         uses: actions/checkout@v2
-      - name: Build & Publish to CR
+      - name: 🐳 Build & Publish to CR
         uses: elgohr/Publish-Docker-Github-Action@3.04
         with:
-          name: phnx47/x-report/x-report
+          name: phnx47/x-report
           username: ${{ secrets.GH_USERNAME }}
           password: ${{ secrets.GH_PKG_PAT }}
           registry: ghcr.io
