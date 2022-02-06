@@ -1,12 +1,11 @@
-name: 🪄 Run
+name: 🪄 Send Email
 
 on:
-  push:
-    branches:
-      - "ci/docker-run"
+  schedule:
+    - cron: "0 11 * * 1,2,3,4,5"
 
 jobs:
-  run:
+  send-email:
     name: 🏭 Run
     runs-on: ubuntu-20.04
     steps:
