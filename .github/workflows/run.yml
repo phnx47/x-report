@@ -18,3 +18,4 @@ jobs:
           registry: ghcr.io
           image: ghcr.io/phnx47/x-report:latest
           options: -e HARVEST_ACCESS_TOKEN=${{ secrets.HARVEST_ACCESS_TOKEN }} -e HARVEST_ACCOUNT_ID=${{ secrets.HARVEST_ACCOUNT_ID }} -e SLACK_WEBHOOK_URL=${{ secrets.SLACK_WEBHOOK_URL }}
+          run: node index.js
