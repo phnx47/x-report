@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import { HarvestReport } from './harvestTypes';
-import { Report } from './report';
+import Report from './report';
 
 export default class Harvest {
   private readonly accessToken: string;

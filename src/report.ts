@@ -1,6 +1,6 @@
 import { HarvestReport } from './harvestTypes';
 
-export class Report {
+export default class Report {
   private readonly from: string;
   private readonly to: string;
   private tasks: Task[];

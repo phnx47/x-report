@@ -1,5 +1,5 @@
 import Harvest from './harvest';
-import { Report } from './report';
+import Report from './report';
 //import Slack from './slack';
 
 if (!process.env.HARVEST_ACCESS_TOKEN)
@@ -17,8 +17,9 @@ const harvest = new Harvest(process.env.HARVEST_ACCESS_TOKEN, process.env.HARVES
 harvest
   .getCurrentWeek()
   .then((report: Report) => {
-    //slack.push(report.getText());
-    console.log(report.getText());
+    const txt = report.getText();
+    console.log(txt);
+    //slack.push(txt);
   })
   .catch((err) => {
     console.error(err)
