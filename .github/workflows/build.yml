@@ -3,7 +3,7 @@ name: 💿 Build
 on:
   push:
     branches:
-      - "ci/docker-run"
+      - "main"
 
 jobs:
   build:

@@ -27,8 +27,17 @@ jobs:
         id: report
         uses: juliangruber/read-file-action@v1
         with:
-          trim: false
+          trim: true
           path: ./report.txt
 
-      - name: Echo report.txt
-        run: echo "${{ steps.report.outputs.content }}"
+      - name: ✉ Send email
+        uses: wadeww/send-email-action@master
+        with:
+          server_address: smtp.fastmail.com
+          port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: x-report
+          body: ${{ steps.report.outputs.content }}
+          to: sergei.kuznetsov@x-team.com
+          from: noreply@phnx47.net
