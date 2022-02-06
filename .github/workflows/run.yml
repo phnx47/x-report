@@ -1,0 +1,42 @@
+name: 🪄 Send Email
+
+on:
+  schedule:
+    - cron: "0 11 * * 1,2,3,4,5"
+
+jobs:
+  send-email:
+    name: 🏭 Run
+    runs-on: ubuntu-20.04
+    steps:
+      - name: 🚚 Checkout
+        uses: actions/checkout@v2
+
+      - name: 🐳 Docker Run
+        uses: addnab/docker-run-action@v3
+        with:
+          username: ${{ secrets.GH_USERNAME }}
+          password: ${{ secrets.GH_PKG_PAT }}
+          registry: ghcr.io
+          image: ghcr.io/phnx47/x-report:latest
+          options: -v ${{ github.workspace }}:/app/out -e HARVEST_ACCESS_TOKEN=${{ secrets.HARVEST_ACCESS_TOKEN }} -e HARVEST_ACCOUNT_ID=${{ secrets.HARVEST_ACCOUNT_ID }} -e SLACK_WEBHOOK_URL=${{ secrets.SLACK_WEBHOOK_URL }}
+          run: node index.js >> out/report.txt
+
+      - name: 🗃 Read report.txt
+        id: report
+        uses: juliangruber/read-file-action@v1
+        with:
+          trim: true
+          path: ./report.txt
+
+      - name: ✉ Send email
+        uses: wadeww/send-email-action@master
+        with:
+          server_address: smtp.fastmail.com
+          port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: x-report
+          body: ${{ steps.report.outputs.content }}
+          to: sergei.kuznetsov@x-team.com
+          from: noreply@phnx47.net

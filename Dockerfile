@@ -15,5 +15,3 @@ WORKDIR /app
 COPY package.json ./
 RUN npm install --only=production
 COPY --from=build /app/dist .
-
-CMD [ "node", "index.js" ]
