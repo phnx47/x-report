@@ -38,5 +38,5 @@ jobs:
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: x-report
           body: ${{ steps.report.outputs.content }}
-          to: sergei.kuznetsov@x-team.com
+          to: ${{ secrets.MAIL_TO }}
           from: noreply@phnx47.net
