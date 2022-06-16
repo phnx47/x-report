@@ -19,4 +19,4 @@ jobs:
       - name: ⚡ Run ESLint
         run: npm run lint
       - name: 🧫 Run commitlint
-        uses: wagoid/commitlint-github-action@v4
+        uses: wagoid/commitlint-github-action@v5
